@@ -1,31 +1,49 @@
-from flask import Flask, request, render_template, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, flash
 from google.cloud import storage
+import os
 
 app = Flask(__name__)
+app.secret_key = 
+# Replace with a real secret key
 
-# Configure the GCS bucket name
-GCS_BUCKET_NAME = 'bkt-sales-data'
+# Replace with your actual GCS bucket name
+GCS_BUCKET = 'GCS_BUKET_NAME_INSERT'
+PROJECT_ID = 'PROJECT_ID_INSERT'
 
-# Initialize the Google Cloud Storage client
+# Initialize a Cloud Storage client
 storage_client = storage.Client()
 
-@app.route('/', methods=['GET', 'POST'])
-def upload_file():
-    if request.method == 'POST':
-        if 'file' not in request.files:
-            return 'No file part'
-        file = request.files['file']
-        if file.filename == '':
-            return 'No selected file'
-        if file:
-            # Upload the file to GCS
-            bucket = storage_client.bucket(GCS_BUCKET_NAME)
-            blob = bucket.blob(file.filename)
-            blob.upload_from_file(file)
-            return f'File {file.filename} uploaded to {GCS_BUCKET_NAME}.'
+@app.route('/')
+def index():
     return render_template('index.html')
 
+@app.route('/upload', methods=['POST'])
+def upload():
+    # Check if the request has a file part
+    if 'file' not in request.files:
+        flash('No file part in the request.')
+        return redirect(url_for('index'))
+    
+    file = request.files['file']
+    
+    # If no file is selected, browser also submits an empty part without filename
+    if file.filename == '':
+        flash('No file selected for uploading.')
+        return redirect(url_for('index'))
+    
+    try:
+        # Access your GCS bucket and create a new blob with the uploaded file's name
+        bucket = storage_client.get_bucket(GCS_BUCKET)
+        blob = bucket.blob(file.filename)
+        
+        # Upload the file to GCS
+        blob.upload_from_file(file)
+        
+        flash('File successfully uploaded to GCS.')
+    except Exception as e:
+        flash(f'An error occurred: {str(e)}')
+    
+    return redirect(url_for('index'))
+
 if __name__ == '__main__':
-    # Ensure the environment variable for the GCS service account key is set
-    #os.environ['GOOGLE_APPLICATION_CREDENTIALS'] = 'path/to/your/service-account-file.json'
     app.run(debug=True)
