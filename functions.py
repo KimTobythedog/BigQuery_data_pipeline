@@ -37,7 +37,7 @@ def load_bq(filename):
     job_config.source_format = bigquery.SourceFormat.CSV
     job_config.skip_leading_rows = 1
     job_config.autodetect = True
-    uri = f'gs://INSERT_FILE_NAME/{filename}'
+    uri = f'gs://INSERT_GCS_BUCKET_NAME/{filename}'
     load_job = client.load_table_from_uri(uri, table_ref, job_config=job_config)
     load_job.result()  
     time.sleep(10)
