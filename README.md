@@ -17,7 +17,7 @@ Since I am new to data pipelines, I cloned this project from a YouTube tutorial 
 This code is based on the following tutorial:
 
 **🎥 Building an Automated Data Pipeline for Sales Data in Google Cloud | GCP Data Engineering Project**  
-🔗 [Watch the YouTube Tutorial](https://www.youtube.com/watch?v=_CQCOusfGrs)  
+🔗 [Watch the YouTube Tutorial] TechTrapture (https://www.youtube.com/watch?v=_CQCOusfGrs)  
 
 📂 **Original GitHub Source Code:**  
 🔗 [Vishal Bulbule’s Repository](https://github.com/vishal-bulbule)  
