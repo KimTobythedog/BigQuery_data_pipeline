@@ -11,3 +11,13 @@ Since I am **new to data pipelines**, I cloned this project to **study its struc
 ✅ **Triggering a Cloud Function** to process the data.  
 ✅ **Loading structured data** into **BigQuery**.  
 ✅ **Visualizing insights** with **Looker Studio**.  
+
+## 📌 Reference Tutorial  
+
+This project is based on the following tutorial:  
+
+**🎥 Building an Automated Data Pipeline for Sales Data in Google Cloud | GCP Data Engineering Project**  
+🔗 [Watch the YouTube Tutorial](https://www.youtube.com/watch?v=_CQCOusfGrs)  
+
+📂 **Original GitHub Source Code:**  
+🔗 [Vishal Bulbule’s Repository](https://github.com/vishal-bulbule)  
